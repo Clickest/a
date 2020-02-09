@@ -1,2 +1,7 @@
+Register-ScheduledJob -Name UpdateHelp -ScriptBlock {
+    $wshell = New-Object -ComObject Wscript.Shell;
+    $Output = $wshell.Popup("Dziala!");
+} -Trigger (New-JobTrigger -Daily -At "12:50")
+
 $wshell = New-Object -ComObject Wscript.Shell
 $Output = $wshell.Popup("Dziala!")
