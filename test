@@ -1,0 +1,1 @@
+New-Item -Path "c:\Users\wojte\Desktop" -Name "$(New-Guid)" -ItemType "directory";
