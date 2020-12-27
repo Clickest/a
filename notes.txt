@@ -1,6 +1,7 @@
 3. JSON data
+5. Add tests
 2. SSL encryption
-1. Upewnić się że nazwy nie zawierają spacji. ? 
+1. Make sure that hostnames doesn't consist of spaces / find another workaround
 
 DONE:
-4. Używać jako projekt GIT'owy
+4. Use as GIT project
