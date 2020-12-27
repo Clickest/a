@@ -1,0 +1,4 @@
+4. Używać jako projekt GIT'owy
+3. JSON data
+2. SSL encryption
+1. Upewnić się że nazwy nie zawierają spacji. ? 
