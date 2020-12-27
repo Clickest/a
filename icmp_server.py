@@ -52,6 +52,7 @@ def handle_load(load, path):
     else:
         print(f"keep-alive packet from: {victim_name}\n")
         command = get_victim_command(victim_name, path)
+        print(command)
         return command
 
     return ""
