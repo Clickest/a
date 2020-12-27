@@ -5,8 +5,6 @@ import json
 import sys
 import os
 
-iface = "eth0"
-
 def prepare_environment():
     path = Path(f"{os.getcwd()}/Victims/")
 
