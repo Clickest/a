@@ -1,7 +1,9 @@
-5. Add tests
 2. SSL encryption
+6. Work on the test coverage
 
 DONE:
 1. Make sure that hostnames doesn't consist of spaces / find another workaround
 3. JSON data
 4. Use as GIT project
+5. Add tests
+7. Base64 encoded commands
