@@ -36,7 +36,6 @@ def deserialize_json(json_object):
         
 def handle_load(load, path, sender_ip):
     deserialized_load = deserialize_json(load)
-    print(deserialized_load)
     victim_name = deserialized_load["h"]
 
     add_victim(victim_name, path)
