@@ -1,6 +1,7 @@
 2. SSL encryption
 6. Work on the test coverage
 8. Add logs to icmp_server
+9. Implement icmp data exfiltration
 
 DONE:
 1. Make sure that hostnames doesn't consist of spaces / find another workaround

