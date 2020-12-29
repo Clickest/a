@@ -39,6 +39,8 @@ def handle_load(load, path, sender_ip):
     victim_name = deserialized_load["h"]
     add_victim(victim_name, path)
 
+    print(deserialized_load)
+
     if("h" not in deserialized_load.keys()):
         return ""
 

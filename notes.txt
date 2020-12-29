@@ -1,7 +1,6 @@
 2. SSL encryption
 6. Work on the test coverage
 8. Add logs to icmp_server
-9. Implement icmp data exfiltration
 
 DONE:
 1. Make sure that hostnames doesn't consist of spaces / find another workaround
@@ -9,3 +8,4 @@ DONE:
 4. Use as GIT project
 5. Add tests
 7. Base64 encoded commands
+9. Implement (actually used the script from aptmasterclass github account) icmp data exfiltration
