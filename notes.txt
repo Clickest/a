@@ -1,6 +1,8 @@
 2. SSL encryption
 6. Work on the test coverage
 8. Add logs to icmp_server
+9. Add multiprocessing
+10. Make victim id more unique
 
 DONE:
 1. Make sure that hostnames doesn't consist of spaces / find another workaround
