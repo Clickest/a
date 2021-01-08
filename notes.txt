@@ -2,7 +2,6 @@
 6. Work on the test coverage
 8. Add logs to icmp_server
 9. Add multiprocessing
-10. Make victim id more unique
 
 DONE:
 1. Make sure that hostnames doesn't consist of spaces / find another workaround
@@ -11,3 +10,4 @@ DONE:
 5. Add tests
 7. Base64 encoded commands
 9. Implement (actually used the script from aptmasterclass github account) icmp data exfiltration
+10. Make victim id more unique ???

