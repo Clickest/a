@@ -4,7 +4,7 @@
 9. Add multiprocessing
 
 DONE:
-1. Make sure that hostnames doesn't consist of spaces / find another workaround
+1. Make sure that hostnames don't consist of spaces / find another workaround
 3. JSON data
 4. Use as GIT project
 5. Add tests
