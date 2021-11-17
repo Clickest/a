@@ -1,7 +1,8 @@
 2. SSL encryption
 6. Work on the test coverage
 8. Add logs to icmp_server
-9. Add multiprocessing
+11. Add multiprocessing
+12. Make client requests less regular
 
 DONE:
 1. Make sure that hostnames don't consist of spaces / find another workaround
